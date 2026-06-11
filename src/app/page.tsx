@@ -7,7 +7,7 @@ import { Footer } from "@/components/footer";
 
 export default function Home() {
   return (
-    <main className="flex flex-col items-center w-full">
+    <main className="flex flex-col items-center w-full" style={{ overflow: "hidden", maxWidth: "100vw" }}>
       <div className="w-full max-w-4xl">
         <Hero />
         <TerminalDemo />

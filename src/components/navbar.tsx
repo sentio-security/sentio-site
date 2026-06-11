@@ -34,17 +34,17 @@ export function Navbar() {
         </Link>
 
         {/* Nav links */}
-        <nav className="flex items-center gap-6">
+        <nav className="flex items-center gap-4 sm:gap-6">
           <Link
             href="#demo"
-            className="text-sm transition-colors hover:opacity-70"
+            className="hidden sm:block text-sm transition-colors hover:opacity-70"
             style={{ color: "#6B4C3B" }}
           >
             Demo
           </Link>
           <Link
             href="#rules"
-            className="text-sm transition-colors hover:opacity-70"
+            className="hidden sm:block text-sm transition-colors hover:opacity-70"
             style={{ color: "#6B4C3B" }}
           >
             Rules
@@ -53,11 +53,11 @@ export function Navbar() {
             href="https://github.com/sentio-security/sentio-rs"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-sm font-medium px-3.5 py-1.5 rounded-md transition-opacity hover:opacity-80"
+            className="flex items-center gap-1.5 text-sm font-medium px-3 sm:px-3.5 py-1.5 rounded-md transition-opacity hover:opacity-80"
             style={{ background: "#2C1810", color: "#FBF0E4" }}
           >
             <GitHubIcon />
-            GitHub
+            <span>GitHub</span>
           </Link>
         </nav>
       </div>

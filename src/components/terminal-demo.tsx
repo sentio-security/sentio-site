@@ -73,7 +73,7 @@ export function TerminalDemo() {
         </div>
 
         {/* Terminal body */}
-        <div className="p-6 font-mono text-sm leading-relaxed overflow-x-auto">
+        <div className="p-4 sm:p-6 font-mono text-xs sm:text-sm leading-relaxed overflow-x-auto">
           {/* prompt line */}
           <div className="mb-6" style={{ color: "#8B6B5A" }}>
             <span style={{ color: "#C4531A" }}>$</span> sentio scan
@@ -100,7 +100,7 @@ export function TerminalDemo() {
                     {f.severity}
                   </span>
                 </div>
-                <div>
+                <div className="break-all">
                   <span style={{ color: "#6B4C3B" }}>Location: </span>
                   <span style={{ color: "#E8D5C0" }}>{f.location}</span>
                 </div>

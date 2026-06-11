@@ -103,9 +103,9 @@ function RuleCard({
     <div
       onMouseEnter={() => onHover(true)}
       onMouseLeave={() => onHover(false)}
-      className="shrink-0 mx-3 rounded-lg p-5 cursor-default transition-all duration-300"
+      className="shrink-0 mx-2 sm:mx-3 rounded-lg p-4 sm:p-5 cursor-default transition-all duration-300"
       style={{
-        width: isHovered ? "340px" : "280px",
+        width: isHovered ? "300px" : "240px",
         background: isHovered ? "#F0E0CC" : "#F5E6D4",
         border: `1px solid ${isHovered ? "#C4A882" : "#E2CCBA"}`,
         boxShadow: isHovered ? "0 4px 24px rgba(44,24,16,0.10)" : "none",
@@ -148,7 +148,7 @@ function RuleCard({
           fontFamily: "var(--font-space-grotesk)",
           fontWeight: 300,
           letterSpacing: "0.01em",
-          maxHeight: isHovered ? "80px" : "40px",
+          maxHeight: isHovered ? "80px" : "36px",
           overflow: "hidden",
         }}
       >
@@ -164,7 +164,7 @@ export function RulesMarquee() {
   const tripled = [...rules, ...rules, ...rules];
 
   return (
-    <section id="rules" className="pb-28 scroll-mt-20 overflow-hidden">
+    <section id="rules" className="pb-28 scroll-mt-20">
       {/* Section header */}
       <div className="max-w-4xl mx-auto px-6 mb-10">
         <h2
@@ -181,6 +181,11 @@ export function RulesMarquee() {
       {/* Marquee track */}
       <div
         className="relative"
+        style={{
+          overflow: "hidden",
+          maxWidth: "100vw",
+          contain: "paint",
+        }}
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => {
           setPaused(false);
@@ -189,24 +194,20 @@ export function RulesMarquee() {
       >
         {/* Left fade */}
         <div
-          className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
-          style={{
-            background: "linear-gradient(to right, #FBF0E4, transparent)",
-          }}
+          className="absolute left-0 top-0 bottom-0 w-16 sm:w-24 z-10 pointer-events-none"
+          style={{ background: "linear-gradient(to right, #FBF0E4, transparent)" }}
         />
         {/* Right fade */}
         <div
-          className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
-          style={{
-            background: "linear-gradient(to left, #FBF0E4, transparent)",
-          }}
+          className="absolute right-0 top-0 bottom-0 w-16 sm:w-24 z-10 pointer-events-none"
+          style={{ background: "linear-gradient(to left, #FBF0E4, transparent)" }}
         />
 
         <div
           className="flex items-start py-4"
           style={{
-            animation: paused ? "none" : "marquee 40s linear infinite",
-            willChange: "transform",
+            animation: paused ? "none" : "marquee-scroll 40s linear infinite",
+            width: "max-content",
           }}
         >
           {tripled.map((rule, i) => (
@@ -221,7 +222,7 @@ export function RulesMarquee() {
       </div>
 
       <style>{`
-        @keyframes marquee {
+        @keyframes marquee-scroll {
           0%   { transform: translateX(0); }
           100% { transform: translateX(calc(-100% / 3)); }
         }
