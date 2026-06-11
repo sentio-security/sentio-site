@@ -21,6 +21,10 @@ export const metadata: Metadata = {
   title: "sentio — solana security scanner",
   description:
     "sentio catches common Rust security mistakes before they reach production. Fast, zero-config, CLI-first.",
+  icons: {
+    icon: "/sentio-logo.png",
+    apple: "/sentio-logo.png",
+  },
 };
 
 export default function RootLayout({
