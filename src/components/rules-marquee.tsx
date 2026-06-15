@@ -233,7 +233,8 @@ export function RulesMarquee() {
         <div
           className="flex items-start py-4"
           style={{
-            animation: paused ? "none" : "marquee-scroll 40s linear infinite",
+            animation: "marquee-scroll 25s linear infinite",
+            animationPlayState: paused ? "paused" : "running",
             width: "max-content",
           }}
         >
