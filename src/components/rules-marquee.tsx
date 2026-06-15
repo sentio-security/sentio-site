@@ -7,64 +7,91 @@ const rules = [
     id: "SW001",
     name: "Missing signer check",
     severity: "critical" as const,
-    description:
-      "AccountInfo or UncheckedAccount fields with authority-role names lacking signer constraints — allows attackers to pass unsigned accounts as authorities.",
+    description: "Authority-like accounts lacking signer validation.",
   },
   {
     id: "SW002",
     name: "Missing owner check",
     severity: "critical" as const,
-    description:
-      "AccountInfo or UncheckedAccount fields with no owner or address constraint — attacker can pass an account owned by any program.",
+    description: "Accounts without owner or address constraints.",
   },
   {
     id: "SW003",
     name: "Arbitrary CPI target",
     severity: "critical" as const,
-    description:
-      "CPI calls via invoke, invoke_signed, or invoke_unchecked without prior program ID validation — allows substitution of a malicious program.",
+    description: "Raw CPI calls missing program ID verification.",
+  },
+  {
+    id: "SW005",
+    name: "Unchecked arithmetic",
+    severity: "high" as const,
+    description: "Unprotected math operations on account fields.",
+  },
+  {
+    id: "SW006",
+    name: "Type cosplay",
+    severity: "critical" as const,
+    description: "Deserialization without discriminator validation.",
   },
   {
     id: "SW008",
     name: "Missing post-CPI reload",
     severity: "high" as const,
-    description:
-      "Account data read after a CPI call without reload() — program operates on stale state that may have been modified by the called program.",
+    description: "Account writes after CPI without reload().",
+  },
+  {
+    id: "SW009",
+    name: "Missing token mint check",
+    severity: "high" as const,
+    description: "Mutable token accounts lacking mint constraints.",
+  },
+  {
+    id: "SW010",
+    name: "Missing token owner check",
+    severity: "high" as const,
+    description: "Token accounts without authority validation.",
   },
   {
     id: "SW011",
     name: "AccountInfo as data account",
-    severity: "high" as const,
-    description:
-      "Data-account fields declared as AccountInfo<'info> instead of Account<'info, T> — bypasses Anchor's owner and discriminator validation.",
+    severity: "medium" as const,
+    description: "Untyped AccountInfo where typed Account is needed.",
   },
   {
     id: "SW012",
     name: "Missing seeds + bump on PDA",
     severity: "high" as const,
-    description:
-      "PDA-like account constraints missing both seeds and bump components — proper PDA derivation requires both tied to trusted inputs.",
+    description: "PDAs with seeds but no bump verification.",
+  },
+  {
+    id: "SW013",
+    name: "PDA seed unvalidated account",
+    severity: "high" as const,
+    description: "PDA seeds referencing unconstrained accounts.",
+  },
+  {
+    id: "SW014",
+    name: "PDA bump not canonical",
+    severity: "medium" as const,
+    description: "Caller-supplied bumps instead of canonical derivation.",
   },
   {
     id: "SW016",
     name: "init_if_needed usage",
     severity: "medium" as const,
-    description:
-      "Anchor account fields using init_if_needed — pattern can permit unintended re-initialization or state reset.",
+    description: "Accounts risking silent reinitialization.",
   },
   {
     id: "SW018",
-    name: "Missing realloc::zero = true",
+    name: "Missing realloc::zero",
     severity: "medium" as const,
-    description:
-      "Account reallocation without realloc::zero = true — reallocated memory may contain stale data readable by the program or attackers.",
+    description: "Realloc operations leaving stale data in memory.",
   },
   {
     id: "SW020",
-    name: "AccountInfo as CPI target",
-    severity: "critical" as const,
-    description:
-      "CPI target program typed as AccountInfo<'info> instead of Program<'info, T> — skips program ID validation, allowing any program substitution.",
+    name: "AccountInfo as CPI program",
+    severity: "medium" as const,
+    description: "Untyped program accounts in CPI contexts.",
   },
 ];
 
@@ -148,7 +175,7 @@ function RuleCard({
           fontFamily: "var(--font-space-grotesk)",
           fontWeight: 300,
           letterSpacing: "0.01em",
-          maxHeight: isHovered ? "80px" : "36px",
+          maxHeight: "36px",
           overflow: "hidden",
         }}
       >
@@ -174,7 +201,7 @@ export function RulesMarquee() {
           What sentio catches
         </h2>
         <p style={{ color: "#6B4C3B" }} className="text-sm">
-          Glimpse on Rules. More adding soon.
+          15 rules targeting real Solana exploit patterns. No generic noise.
         </p>
       </div>
 
