@@ -93,6 +93,13 @@ const rules = [
     severity: "medium" as const,
     description: "Untyped program accounts in CPI contexts.",
   },
+  {
+    id: "SW021",
+    name: "PDA seed collision risk",
+    severity: "high" as const,
+    description:
+      "In a seed where two or more adjacent elements are both with no fixed-length",
+  },
 ];
 
 const severityConfig = {
@@ -201,7 +208,7 @@ export function RulesMarquee() {
           What sentio catches
         </h2>
         <p style={{ color: "#6B4C3B" }} className="text-sm">
-          15 rules targeting real Solana exploit patterns. No generic noise.
+          16 rules targeting real Solana exploit patterns. No generic noise.
         </p>
       </div>
 
@@ -222,12 +229,16 @@ export function RulesMarquee() {
         {/* Left fade */}
         <div
           className="absolute left-0 top-0 bottom-0 w-16 sm:w-24 z-10 pointer-events-none"
-          style={{ background: "linear-gradient(to right, #FBF0E4, transparent)" }}
+          style={{
+            background: "linear-gradient(to right, #FBF0E4, transparent)",
+          }}
         />
         {/* Right fade */}
         <div
           className="absolute right-0 top-0 bottom-0 w-16 sm:w-24 z-10 pointer-events-none"
-          style={{ background: "linear-gradient(to left, #FBF0E4, transparent)" }}
+          style={{
+            background: "linear-gradient(to left, #FBF0E4, transparent)",
+          }}
         />
 
         <div
