@@ -5,11 +5,19 @@ import { useState, useEffect } from "react";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [installs, setInstalls] = useState<number | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    fetch("/api/installs")
+      .then((r) => r.json())
+      .then((d) => typeof d.count === "number" && setInstalls(d.count))
+      .catch(() => {});
   }, []);
 
   return (
@@ -49,6 +57,16 @@ export function Navbar() {
           >
             Rules
           </Link>
+          {/* {installs !== null && (
+            <span
+              className="hidden sm:flex items-center gap-1 text-xs tabular-nums"
+              style={{ color: "#9B7B6B" }}
+              title="unique installs"
+            >
+              <span style={{ color: "#C4531A", fontSize: "7px" }}>●</span>
+              {installs} installs
+            </span>
+          )} */}
           <Link
             href="https://github.com/sentio-security/sentio-rs"
             target="_blank"
